@@ -1,0 +1,172 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0b0e1a;
+  color: #f0f4ff;
+  height: 100vh;
+  overflow: hidden;
+  background-image: radial-gradient(circle at 20% 30%, #162044 0%, #070a12 90%);
+}
+
+/* ROOM CONTAINER */
+#roomContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+/* VIDEO GRID — full screen remote, PIP local */
+.video-grid {
+  flex: 1;
+  position: relative;
+  background: #0a0c14;
+  overflow: hidden;
+}
+
+/* Remote wrapper – fills the entire grid */
+.video-wrapper.remote {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #111624;
+}
+
+.video-wrapper.remote video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #0a0c14;
+}
+
+/* Local wrapper – Picture‑in‑Picture (PIP) overlay */
+.video-wrapper.local {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 160px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+  background: #1a1f2e;
+}
+.video-wrapper.local:hover {
+  transform: scale(1.03);
+  border-color: #00f3ff;
+  box-shadow: 0 0 24px rgba(0, 243, 255, 0.3);
+}
+.video-wrapper.local video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Labels */
+.video-wrapper .label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #ccd6f6;
+  pointer-events: none;
+  z-index: 5;
+}
+.video-wrapper.remote .label {
+  background: rgba(0, 243, 255, 0.15);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+/* CONTROL BAR */
+.control-bar {
+  background: rgba(20, 28, 48, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap;
+  z-index: 30;
+}
+.ctrl-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+.ctrl-btn.danger {
+  background: rgba(255, 50, 70, 0.25);
+  color: #ff5a6e;
+}
+.ctrl-btn.danger:hover {
+  background: rgba(255, 50, 70, 0.5);
+}
+.room-code-badge {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #00f3ff;
+  margin-left: auto;
+  border: 1px solid rgba(0, 243, 255, 0.15);
+}
+
+/* Swap animation (optional) */
+.swap-transition {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* RESPONSIVE: smaller PIP on tiny phones */
+@media (max-width: 500px) {
+  .video-wrapper.local {
+    width: 110px;
+    height: 160px;
+    bottom: 16px;
+    right: 16px;
+    border-radius: 12px;
+  }
+  .ctrl-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .room-code-badge {
+    font-size: 0.7rem;
+    padding: 4px 12px;
+  }
+}
+@media (max-width: 400px) {
+  .video-wrapper.local {
+    width: 80px;
+    height: 120px;
+    bottom: 12px;
+    right: 12px;
+  }
+}
